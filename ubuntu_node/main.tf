@@ -3,30 +3,25 @@ provider "libvirt" {
   uri = "qemu:///system"
 }
 
-variable "base_img_url" {
-  type = "string"
-}
-
-resource "libvirt_pool" "elastic" {
-  name = "elastic"
+resource "libvirt_pool" "pool" {
+  name = var.pool_name
   type = "dir"
-  path = "/var/lib/libvirt/images/elastic"
+  path = "/var/lib/libvirt/images/${var.pool_name}"
 }
 
 # We fetch the latest ubuntu release image from their mirrors
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
-  pool   = libvirt_pool.elastic.name
+  pool   = libvirt_pool.pool.name
   source = var.base_img_url
-#  source = "/var/lib/libvirt/images/BASE/ubuntu-18.04-minimal-cloudimg-amd64.qcow2"
   format = "qcow2"
 }
 
-resource "libvirt_volume" "elastic-qcow2" {
-  name = "elastic-qcow2"
-  pool = libvirt_pool.elastic.name
+resource "libvirt_volume" "instance-qcow2" {
+  name = "${var.instance_name}-qcow2"
+  pool = libvirt_pool.pool.name
   base_volume_id = libvirt_volume.ubuntu-qcow2.id
-  size = 10737418240 #10G
+  size = var.vol_size #10G
 }
 
 data "template_file" "user_data" {
@@ -45,14 +40,14 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   name           = "commoninit.iso"
   user_data      = data.template_file.user_data.rendered
   network_config = data.template_file.network_config.rendered
-  pool           = libvirt_pool.elastic.name
+  pool           = libvirt_pool.pool.name
 }
 
 # Create the machine
-resource "libvirt_domain" "domain-es-n1" {
-  name   = "es-n1"
-  memory = "3072"
-  vcpu   = 2
+resource "libvirt_domain" "domain-vm" {
+  name   = var.instance_name
+  memory = var.memory_size
+  vcpu   = var.cpu_qty
 
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
@@ -76,7 +71,7 @@ resource "libvirt_domain" "domain-es-n1" {
   }
 
   disk {
-    volume_id = libvirt_volume.elastic-qcow2.id
+    volume_id = libvirt_volume.instance-qcow2.id
   }
 
   graphics {
