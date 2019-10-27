@@ -1,11 +1,7 @@
-# instance the provider
-#provider "libvirt" {
-#  uri = "qemu:///system"
-#}
-
 module "ubuntu_node" {
   source = "./ubuntu_node"
   instance_name = "my_es_1"
+  base_img_url = "/var/lib/libvirt/images/BASE/bionic-server-cloudimg-amd64.img"
 }
 
 terraform {
