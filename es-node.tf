@@ -3,6 +3,10 @@ provider "libvirt" {
   uri = "qemu:///system"
 }
 
+variable "base_img_url" {
+  type = "string"
+}
+
 resource "libvirt_pool" "elastic" {
   name = "elastic"
   type = "dir"
@@ -10,12 +14,19 @@ resource "libvirt_pool" "elastic" {
 }
 
 # We fetch the latest ubuntu release image from their mirrors
-resource "libvirt_volume" "elastic-qcow2" {
-  name   = "elastic-qcow2"
+resource "libvirt_volume" "ubuntu-qcow2" {
+  name   = "ubuntu-qcow2"
   pool   = libvirt_pool.elastic.name
-  source = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+  source = var.base_img_url
 #  source = "/var/lib/libvirt/images/BASE/ubuntu-18.04-minimal-cloudimg-amd64.qcow2"
   format = "qcow2"
+}
+
+resource "libvirt_volume" "elastic-qcow2" {
+  name = "elastic-qcow2"
+  pool = libvirt_pool.elastic.name
+  base_volume_id = libvirt_volume.ubuntu-qcow2.id
+  size = 10737418240 #10G
 }
 
 data "template_file" "user_data" {
@@ -40,7 +51,7 @@ resource "libvirt_cloudinit_disk" "commoninit" {
 # Create the machine
 resource "libvirt_domain" "domain-es-n1" {
   name   = "es-n1"
-  memory = "2048"
+  memory = "3072"
   vcpu   = 2
 
   cloudinit = libvirt_cloudinit_disk.commoninit.id
