@@ -41,3 +41,9 @@ variable "instance_name" {
   description = "Name of instance"
   type = string
 }
+
+#variable "pool_name" {
+#  description = "Name of pool for volume and base image"
+#  default = "default"
+#  type = string
+#}

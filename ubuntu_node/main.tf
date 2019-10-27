@@ -3,23 +3,23 @@ provider "libvirt" {
   uri = "qemu:///system"
 }
 
-resource "libvirt_pool" "pool" {
-  name = var.pool_name
-  type = "dir"
-  path = "/var/lib/libvirt/images/${var.pool_name}"
-}
+#resource "libvirt_pool" "pool" {
+#  name = var.pool_name
+#  type = "dir"
+#  path = "/var/lib/libvirt/images/${var.pool_name}"
+#}
 
 # We fetch the latest ubuntu release image from their mirrors
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = "ubuntu-qcow2"
-  pool   = libvirt_pool.pool.name
+#  pool   = libvirt_pool.pool.name
   source = var.base_img_url
   format = "qcow2"
 }
 
 resource "libvirt_volume" "instance-qcow2" {
   name = "${var.instance_name}-qcow2"
-  pool = libvirt_pool.pool.name
+#  pool = libvirt_pool.pool.name
   base_volume_id = libvirt_volume.ubuntu-qcow2.id
   size = var.vol_size #10G
 }
