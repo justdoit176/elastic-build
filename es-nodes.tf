@@ -1,7 +1,7 @@
 # instance the provider
-provider "libvirt" {
-  uri = "qemu:///system"
-}
+#provider "libvirt" {
+#  uri = "qemu:///system"
+#}
 
 module "ubuntu_node" {
   source = "./ubuntu_node"
