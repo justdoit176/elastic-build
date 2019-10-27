@@ -40,11 +40,11 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   name           = "commoninit.iso"
   user_data      = data.template_file.user_data.rendered
   network_config = data.template_file.network_config.rendered
-  pool           = libvirt_pool.pool.name
+#  pool           = libvirt_pool.pool.name
 }
 
 # Create the machine
-resource "libvirt_domain" "domain-vm" {
+resource "libvirt_domain" "vm" {
   name   = var.instance_name
   memory = var.memory_size
   vcpu   = var.cpu_qty
