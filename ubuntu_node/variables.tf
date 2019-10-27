@@ -20,8 +20,8 @@ variable "vol_size" {
 }
 
 variable "memory_size" {
-  description = "RAM size"
-  default = 2147483648 #2G
+  description = "RAM size in MiB"
+  default = 2048
   type = number
 }
 
