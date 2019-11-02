@@ -21,6 +21,7 @@ resource "libvirt_domain" "vm" {
   name   = var.instance_name
   memory = var.memory_size
   vcpu   = var.cpu_qty
+  running = false
 
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 

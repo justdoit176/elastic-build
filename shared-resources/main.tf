@@ -7,6 +7,9 @@ resource "libvirt_pool" "basepool" {
   name = var.basepool_name
   type = "dir"
   path = "/var/lib/libvirt/images/${var.basepool_name}"
+  xml {
+    xslt = file("${path.module}/poolperms.xsl")
+  }
 }
 
 # We fetch the latest release image from their mirrors
