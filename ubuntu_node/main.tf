@@ -1,6 +1,6 @@
 # instance the provider
 provider "libvirt" {
-  uri = "qemu:///system"
+  uri = var.qemu_uri
 }
 
 #resource "libvirt_pool" "pool" {
@@ -18,7 +18,8 @@ resource "libvirt_volume" "instance-qcow2" {
 
 # Create the machine
 resource "libvirt_domain" "vm" {
-  name   = var.instance_name
+  count  = var.instances
+  name   = "${var.instance_name}_${count.index}"
   memory = var.memory_size
   vcpu   = var.cpu_qty
   running = false

@@ -7,6 +7,12 @@ variable "qemu_uri" {
   type = string
 }
 
+variable "instances" {
+  default = 1
+  type = number
+  description = "Number of VMs to create"
+}
+
 variable "base_img_url" {
   description = "Location of ubuntu base image to use for volumes"
   default = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
