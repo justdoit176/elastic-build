@@ -10,10 +10,11 @@ provider "libvirt" {
 #}
 
 resource "libvirt_volume" "instance-qcow2" {
-  name = "${var.instance_name}-qcow2"
+  count = var.instances
+  name = "${var.instance_name}_${count.index}.qcow2"
 #  pool = libvirt_pool.pool.name
-  base_volume_id = libvirt_volume.ubuntu-qcow2.id
-  size = var.vol_size #10G
+  base_volume_id = var.base_vol_id
+  size = var.vol_size
 }
 
 # Create the machine
@@ -24,7 +25,7 @@ resource "libvirt_domain" "vm" {
   vcpu   = var.cpu_qty
   running = false
 
-  cloudinit = libvirt_cloudinit_disk.commoninit.id
+  cloudinit = var.cloudinit_id
 
   network_interface {
     network_name = "default"
@@ -46,7 +47,7 @@ resource "libvirt_domain" "vm" {
   }
 
   disk {
-    volume_id = libvirt_volume.instance-qcow2.id
+    volume_id = libvirt_volume.instance-qcow2[count.index].id
   }
 
   graphics {

@@ -3,6 +3,18 @@ provider "libvirt" {
   uri = "qemu:///system"
 }
 
+output "baseimg_id" {
+  value = libvirt_volume.baseimg-qcow2.id
+}
+
+#output "basepool_id" {
+#  value = libvirt_pool.basepool.id
+#}
+
+output "cloudinit_id" {
+  value = libvirt_cloudinit_disk.commoninit.id
+}
+
 resource "libvirt_pool" "basepool" {
   name = var.basepool_name
   type = "dir"

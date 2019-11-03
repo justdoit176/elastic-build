@@ -7,7 +7,8 @@ module "ubuntu_nodes" {
   instances = 2
   source = "./ubuntu_node"
   instance_name = "es_node"
-  vase_volume = ...
+  base_vol_id = module.baseres.baseimg_id
+  cloudinit_id = module.baseres.cloudinit_id
 #  base_img_url = "/var/lib/libvirt/images/BASE/bionic-server-cloudimg-amd64.img"
 }
 

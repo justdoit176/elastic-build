@@ -13,11 +13,21 @@ variable "instances" {
   description = "Number of VMs to create"
 }
 
-variable "base_img_url" {
-  description = "Location of ubuntu base image to use for volumes"
-  default = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+variable "base_vol_id" {
   type = string
+  description = "Volume base image ID"
 }
+
+variable "cloudinit_id" {
+  type = string
+  description = "CloudInit ISO image ID"
+}
+
+#variable "base_img_url" {
+#  description = "Location of ubuntu base image to use for volumes"
+#  default = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
+#  type = string
+#}
 
 variable "vol_size" {
   description = "Size of volume in bytes"
