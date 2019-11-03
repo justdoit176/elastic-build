@@ -35,7 +35,7 @@ variable "vol_size" {
   type = number
 }
 
-variable "memory_size" {
+variable "memory" {
   description = "RAM size in MiB"
   default = 2048
   type = number
@@ -47,8 +47,8 @@ variable "pool_name" {
   type = string
 }
 
-variable "cpu_qty" {
-  description = "Number of vCPU to assign"
+variable "vCPUs" {
+  description = "Number of vCPUs to assign"
   default = 2
   type = number
 }

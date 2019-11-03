@@ -21,9 +21,9 @@ resource "libvirt_volume" "instance-qcow2" {
 resource "libvirt_domain" "vm" {
   count  = var.instances
   name   = "${var.instance_name}_${count.index}"
-  memory = var.memory_size
-  vcpu   = var.cpu_qty
-  running = false
+  memory = var.memory
+  vcpu   = var.vCPUs
+  running = true
 
   cloudinit = var.cloudinit_id
 

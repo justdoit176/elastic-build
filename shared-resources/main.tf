@@ -7,10 +7,6 @@ output "baseimg_id" {
   value = libvirt_volume.baseimg-qcow2.id
 }
 
-#output "basepool_id" {
-#  value = libvirt_pool.basepool.id
-#}
-
 output "cloudinit_id" {
   value = libvirt_cloudinit_disk.commoninit.id
 }
@@ -26,7 +22,7 @@ resource "libvirt_pool" "basepool" {
 
 # We fetch the latest release image from their mirrors
 resource "libvirt_volume" "baseimg-qcow2" {
-  name   = "baseimg-qcow2"
+  name   = "ubuntu_cloudimg.qcow2"
   pool   = libvirt_pool.basepool.name
   source = var.base_img_src
   format = "qcow2"
@@ -34,6 +30,9 @@ resource "libvirt_volume" "baseimg-qcow2" {
 
 data "template_file" "user_data" {
   template = file("${path.module}/cloud_init.cfg")
+  vars = {
+    ssh_pub_key = var.ssh_pub_key
+  }
 }
 
 data "template_file" "network_config" {
@@ -45,7 +44,7 @@ data "template_file" "network_config" {
 # Use CloudInit to add our ssh-key to the instance
 # you can add also meta_data field
 resource "libvirt_cloudinit_disk" "commoninit" {
-  name           = "commoninit.iso"
+  name           = "cloudinit.iso"
   user_data      = data.template_file.user_data.rendered
   network_config = data.template_file.network_config.rendered
   pool           = libvirt_pool.basepool.name
