@@ -13,16 +13,16 @@ module "baseres" {
 }
 
 module "ubuntu_nodes" {
-  instances = 3
   source = "./ubuntu_node"
+  name = "elastixluster"
   instance_name = "es_node"
   memory = 3072
   vCPUs = 3
   vol_size = 10737418240 #10G
+  instances = 3
   
   base_vol_id = module.baseres.baseimg_id
   cloudinit_id = module.baseres.cloudinit_id
-#  base_img_url = "/var/lib/libvirt/images/BASE/bionic-server-cloudimg-amd64.img"
 }
 
-# IPs: use wait_for_lease true or after creation use terraform refresh and terraform show for the ips of domain
+# IPs: after creation use terraform refresh and terraform show to retrieve the IPs of domain(s)

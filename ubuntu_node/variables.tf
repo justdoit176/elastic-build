@@ -1,5 +1,4 @@
-#base_img_url = "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img"
-#base_img_url = "/var/lib/libvirt/images/BASE/ubuntu-18.04-minimal-cloudimg-amd64.qcow2"
+variable "name" {}
 
 variable "qemu_uri" {
   description = "QEMU connection string"
