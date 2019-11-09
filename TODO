@@ -1,6 +1,7 @@
 --- TODO ---
-[ ] Remove unused scripts and dirs
+[ ] Parametrize provider URI
 [ ] Add/parametrize cloudinit meta-data for hostnames
 [ ] Remove/parametrize poolperms.xsl
 [ ] Add XSL for volumes permissions, if needed
+[x] Remove unused scripts and dirs
 [x] parametrize SSH key
