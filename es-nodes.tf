@@ -7,9 +7,15 @@ variable "ssh_pub_key" {
   description = "SSH public key to access the VMs"
 }
 
+variable "base_img_src" {
+  type = string
+  description = "Base img source location"
+}
+
 module "baseres" {
   source = "./shared-resources"
   ssh_pub_key = var.ssh_pub_key
+  base_img_src = var.base_img_src
 }
 
 module "ubuntu_nodes" {
