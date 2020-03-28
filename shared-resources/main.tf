@@ -31,7 +31,7 @@ resource "libvirt_volume" "baseimg-qcow2" {
 data "template_file" "user_data" {
   template = file("${path.module}/cloud_init.cfg")
   vars = {
-    ssh_pub_key = var.ssh_pub_key
+    ssh_pub_key = chomp(var.ssh_pub_key)
   }
 }
 
