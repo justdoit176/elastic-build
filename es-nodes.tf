@@ -11,7 +11,7 @@ module "baseres" {
 module "ubuntu_nodes" {
   source = "./ubuntu_node"
   name = "elastixluster"
-  instance_name = "es_node"
+  instance_name = "es"
   memory = 3072
   vCPUs = 3
   vol_size = 10737418240 #10G
