@@ -31,7 +31,7 @@ module "ubuntu_nodes" {
 }
 
 output "Instances_IP" {
-  value = module.ubuntu_nodes.instances_ip
+  value = flatten(module.ubuntu_nodes.instances_ip)
 }
 
 # IPs: after creation use terraform refresh and terraform show to retrieve the IPs of domain(s)
