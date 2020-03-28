@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 # instance the provider
 provider "libvirt" {
   uri = var.qemu_uri
@@ -29,6 +33,7 @@ resource "libvirt_domain" "vm" {
 
   network_interface {
     network_name = "default"
+    wait_for_lease = true
   }
 
   # IMPORTANT: this is a known bug on cloud images, since they expect a console
@@ -55,10 +60,6 @@ resource "libvirt_domain" "vm" {
     listen_type = "address"
     autoport    = true
   }
-}
-
-terraform {
-  required_version = ">= 0.12"
 }
 
 # IPs: use wait_for_lease true or after creation use terraform refresh and terraform show for the ips of domain

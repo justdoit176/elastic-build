@@ -26,9 +26,12 @@ module "ubuntu_nodes" {
   vCPUs = 3
   vol_size = 10737418240 #10G
   instances = 3
-  
   base_vol_id = module.baseres.baseimg_id
   cloudinit_id = module.baseres.cloudinit_id
+}
+
+output "Instances_IP" {
+  value = module.ubuntu_nodes.instances_ip
 }
 
 # IPs: after creation use terraform refresh and terraform show to retrieve the IPs of domain(s)

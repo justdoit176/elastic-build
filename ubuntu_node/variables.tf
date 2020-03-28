@@ -62,3 +62,9 @@ variable "instance_name" {
 #  default = "default"
 #  type = string
 #}
+
+output "instances_ip" {
+  value = flatten(flatten(libvirt_domain.vm.*.network_interface).*.addresses)
+}
+
+
