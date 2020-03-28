@@ -1,7 +1,6 @@
 variable "basepool_name" {
   description = "Storage pool for base images"
   type = string
-  default = "base_images"
 }
 
 variable "base_img_src" {

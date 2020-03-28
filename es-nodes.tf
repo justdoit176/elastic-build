@@ -6,6 +6,7 @@ module "baseres" {
   source = "./shared-resources"
   ssh_pub_key = var.ssh_pub_key
   base_img_src = var.base_img_src
+  basepool_name = "elastic_base_imgs"
 }
 
 module "ubuntu_nodes" {
