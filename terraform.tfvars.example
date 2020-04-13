@@ -1,0 +1,2 @@
+ssh_pub_key = "ssh-rsa AAAAgaYPrHI[...]U0rMSuL5N7g+R myname@tweed"
+base_img_src = "/home/myname/Downloads/ubuntu_cloudimg.qcow2"
