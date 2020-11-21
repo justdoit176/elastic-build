@@ -5,3 +5,4 @@
 [ ] Add XSL for volumes permissions, if needed
 [x] Remove unused scripts and dirs
 [x] parametrize SSH key
+
