@@ -1,0 +1,12 @@
+storage:
+  files:
+  - path: /etc/hostname
+    filesystem: "root"
+    contents:
+      inline: "fc1"
+
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDY6u3J1XatlJGwdEp1eRSuAAetJHiREZyy0CTTQwCkbzRzx2WERBgkP0PtaI0MK38LkYjDbiSvjoQUJFqNSPAjBQVfkUuvq2oeL6SjYHIw3SU6Zt8UgwbiNqkhwiPrY7uc2aOM5MSFPrP1JgZ9qU5tJrF4pDIwKc6vYoiJVeTnQq9Fo6BcbPwkS+QHXTH/hs3c0rji5zR710GeUv47nMEykave1jY5PhqgDe+q1q2S5R2rXRQBN00VSpe2bMX34UE76UgXwlvyZobBVsCjkbZLoZRCCuc6bg3p0AM7aI/BaLqRyFNSHJ7pjFQGeEgNWAi6cPzW8drCoiBwH5iGEdS6/fpAb7TKodwJTao0clcNY7Ke1cS0S3ZZTqy0uotWI3icFBD6F0hrzMUfxWH2likqfasO4EfPmGE89k3nemvEdVoox4opb8w573/sklQ4BqjogQZ78ItJrsUgxqTCGCRV8C7Vg0icQiivUWPRrS8x/vHFeH1HKn2JER/7rW7mCWM="
