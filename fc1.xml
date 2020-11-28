@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<domain xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0" type="kvm">
+<domain type="kvm">
   <name>fc1</name>
-  <uuid>10130e89-8aa3-4de7-8f8b-cc63203bd45b</uuid>
+  <uuid>5498cedb-1d29-4bb7-a345-1f0f6c2a9313</uuid>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
       <libosinfo:os id="http://fedoraproject.org/fedora/10"/>
@@ -11,7 +10,7 @@
   <currentMemory>4194304</currentMemory>
   <vcpu>2</vcpu>
   <os>
-    <type arch="x86_64" machine="pc-i440fx-5.1">hvm</type>
+    <type arch="x86_64" machine="pc-i440fx-focal">hvm</type>
     <boot dev="hd"/>
   </os>
   <features>
@@ -28,30 +27,26 @@
     <suspend-to-mem enabled="no"/>
     <suspend-to-disk enabled="no"/>
   </pm>
-  <qemu:commandline>
-    <qemu:arg value="-fw_cfg"/>
-    <qemu:arg value="name=opt/org.flatcar-linux/config,file=/var/lib/libvirt/boot/fc1.ign"/>
-  </qemu:commandline>
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
-    <disk type="file" device="disk">
-      <driver name="qemu" type="qcow2"/>
-      <source file="/var/lib/libvirt/images/fc1.qcow2"/>
+    <disk type="block" device="disk">
+      <driver name="qemu" type="raw" cache="none" io="native"/>
+      <source dev="/dev/vg_zero/sn_fc1"/>
       <target dev="vda" bus="virtio"/>
     </disk>
-    <controller type="usb" model="ich9-ehci1"/>
-    <controller type="usb" model="ich9-uhci1">
+    <controller type="usb" index="0" model="ich9-ehci1"/>
+    <controller type="usb" index="0" model="ich9-uhci1">
       <master startport="0"/>
     </controller>
-    <controller type="usb" model="ich9-uhci2">
+    <controller type="usb" index="0" model="ich9-uhci2">
       <master startport="2"/>
     </controller>
-    <controller type="usb" model="ich9-uhci3">
+    <controller type="usb" index="0" model="ich9-uhci3">
       <master startport="4"/>
     </controller>
     <interface type="network">
-      <source network="natty"/>
-      <mac address="52:54:00:c4:57:f4"/>
+      <source network="default"/>
+      <mac address="52:54:00:26:27:f5"/>
       <model type="virtio"/>
     </interface>
     <console type="pty"/>
@@ -61,12 +56,16 @@
     </channel>
     <graphics type="vnc" port="-1"/>
     <video>
-      <model type="vga"/>
+      <model type="qxl"/>
     </video>
     <memballoon model="virtio"/>
     <rng model="virtio">
       <backend model="random">/dev/urandom</backend>
     </rng>
   </devices>
+  <qemu:commandline xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0">
+    <qemu:arg value="-fw_cfg"/>
+    <qemu:arg value="name=opt/org.flatcar-linux/config,file=/var/lib/libvirt/boot/fc1.ign"/>
+  </qemu:commandline>
 </domain>
 
