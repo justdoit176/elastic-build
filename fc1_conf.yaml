@@ -5,6 +5,13 @@ storage:
     contents:
       inline: "fc1"
 
+etcd:
+  advertise_client_urls:       http://fc1:2379
+  initial_advertise_peer_urls: http://fc1:2380
+  listen_client_urls:          http://0.0.0.0:2379
+  listen_peer_urls:            http://fc1:2380
+  discovery: https://discovery.etcd.io/e29b53b8ee50a0977b3a92277232b5a8
+
 passwd:
   users:
     - name: core

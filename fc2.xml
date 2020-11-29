@@ -1,6 +1,6 @@
 <domain type="kvm">
-  <name>fc1</name>
-  <uuid>37ba7f36-71ba-4c43-9ea2-d93968707590</uuid>
+  <name>fc2</name>
+  <uuid>92c2af28-b24d-417d-a0fe-35cfeadf7732</uuid>
   <metadata>
     <libosinfo:libosinfo xmlns:libosinfo="http://libosinfo.org/xmlns/libvirt/domain/1.0">
       <libosinfo:os id="http://fedoraproject.org/fedora/10"/>
@@ -31,7 +31,7 @@
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type="block" device="disk">
       <driver name="qemu" type="raw" cache="none" io="native"/>
-      <source dev="/dev/vg_zero/sn_fc1"/>
+      <source dev="/dev/vg_zero/sn_fc2"/>
       <target dev="vda" bus="virtio"/>
     </disk>
     <controller type="usb" index="0" model="ich9-ehci1"/>
@@ -46,7 +46,7 @@
     </controller>
     <interface type="network">
       <source network="default"/>
-      <mac address="52:54:00:bc:58:b1"/>
+      <mac address="52:54:00:a9:0c:38"/>
       <model type="virtio"/>
     </interface>
     <console type="pty"/>
@@ -65,7 +65,7 @@
   </devices>
   <qemu:commandline xmlns:qemu="http://libvirt.org/schemas/domain/qemu/1.0">
     <qemu:arg value="-fw_cfg"/>
-    <qemu:arg value="name=opt/org.flatcar-linux/config,file=/var/lib/libvirt/boot/fc1.ign"/>
+    <qemu:arg value="name=opt/org.flatcar-linux/config,file=/var/lib/libvirt/boot/fc2.ign"/>
   </qemu:commandline>
 </domain>
 

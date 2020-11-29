@@ -1,0 +1,19 @@
+storage:
+  files:
+  - path: /etc/hostname
+    filesystem: "root"
+    contents:
+      inline: "fc2"
+
+etcd:
+  advertise_client_urls:       http://fc2:2379
+  initial_advertise_peer_urls: http://fc2:2380
+  listen_client_urls:          http://0.0.0.0:2379
+  listen_peer_urls:            http://fc2:2380
+  discovery: https://discovery.etcd.io/e29b53b8ee50a0977b3a92277232b5a8
+
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCdwN4LKW12xI3ja32U0VJsgtaFGG4t4qfyL+im/KMEysZLBdCIlJB3x5RoB/Y++VEXeiemWJtdEV1SS48c0VPyt+jAZggwgw8szO+Zdr4moB2FZOHsQTpMLFrJW2AAD+ISSbTIvh6cIgxIjYrQc/9zw+k/UDGH8mhG5VCiG7uEccPFGg7XffMjdMXrh8gH1g2ytZ25m1RU2/eOFTG9qVT9UZbEWMGbgDvWYTR2LKCApH918V5L1vIE58etAXHiv1JeG4oUzZVMaYP6KNs99d70hCN53QbfrGkqFveg3OH5vL3yziklC1PYI6A8kvjdtAgM41uTOKwByZ89ei0Fy57ONO4XZD1ylQZcl3tVZVBBp3uPR3UvcU1LyvhaZvkHe2wWbV285TshTYDP6z3gCPjQS8asJ8J7cSdWahraYudQ+c2sWfngMWExFjcixFrj3yz75YzLM4bq2UyRtVHkjn7c/Yd/baiLu5/R8VsuIqJ6al6iq/2PA3Ylh5JjRHO03cE= me@silence"
